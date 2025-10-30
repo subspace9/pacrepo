@@ -3,11 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Classic Pac-Man game with modern web technologies and 16-bit sound">
     <link rel="stylesheet" href="css/style.css">
-    <title>Game Project</title>
+    <title>Pac-Man Game</title>
 </head>
 <body>
-    <h1>Welcome to the Game Project</h1>
+    <div class="container">
+        <h1>PAC-MAN</h1>
+        
+        <canvas id="gameCanvas" width="560" height="620"></canvas>
+        
+        <div class="controls">
+            <h3>Game Controls</h3>
+            <p>
+                <span class="key-hint">↑ ↓ ← →</span> or 
+                <span class="key-hint">W A S D</span> - Move
+            </p>
+            <p><span class="key-hint">P</span> or <span class="key-hint">ESC</span> - Pause</p>
+            <p><span class="key-hint">M</span> - Toggle Sound</p>
+            <p><span class="key-hint">ENTER</span> or <span class="key-hint">Click</span> - Start/Restart</p>
+        </div>
+
+        <div class="info-panel">
+            <div class="info-item">
+                <div class="label">Objective</div>
+                <div style="font-size: 0.9rem; color: #ffffff; margin-top: 5px;">
+                    Eat all pellets while avoiding ghosts!
+                </div>
+            </div>
+        </div>
+
+        <div class="ghost-info">
+            <div class="ghost-item">
+                <div class="ghost-name ghost-color-blinky">● Blinky</div>
+                <div class="ghost-behavior">Direct Chase</div>
+            </div>
+            <div class="ghost-item">
+                <div class="ghost-name ghost-color-pinky">● Pinky</div>
+                <div class="ghost-behavior">Ambush</div>
+            </div>
+            <div class="ghost-item">
+                <div class="ghost-name ghost-color-inky">● Inky</div>
+                <div class="ghost-behavior">Pattern-Based</div>
+            </div>
+            <div class="ghost-item">
+                <div class="ghost-name ghost-color-clyde">● Clyde</div>
+                <div class="ghost-behavior">Random</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Classic Pac-Man Game • Modern Web Implementation</p>
+        </footer>
+    </div>
+
+    <!-- Load game scripts in order -->
+    <script src="js/utils.js"></script>
+    <script src="js/sound.js"></script>
+    <script src="js/maze.js"></script>
+    <script src="js/pacman.js"></script>
+    <script src="js/ghost.js"></script>
     <script src="js/game.js"></script>
 </body>
 </html>
