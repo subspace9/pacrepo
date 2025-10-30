@@ -156,7 +156,7 @@ class StorageHelper {
     static KEY_SETTINGS = 'pacman_settings';
 
     static getHighScore() {
-        return parseInt(localStorage.getItem(this.KEY_HIGH_SCORE) || '0');
+        return parseInt(localStorage.getItem(this.KEY_HIGH_SCORE) || '0', 10);
     }
 
     static setHighScore(score) {

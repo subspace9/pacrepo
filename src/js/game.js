@@ -41,6 +41,12 @@ class Game {
         this.chaseDuration = 20000; // 20 seconds
         this.inScatterMode = true;
         
+        // State transition timers
+        this.deathTimer = 0;
+        this.deathDuration = 2000; // 2 seconds
+        this.levelCompleteTimer = 0;
+        this.levelCompleteDuration = 2000; // 2 seconds;
+        
         this.init();
     }
 
@@ -230,9 +236,39 @@ class Game {
 
         if (this.state === 'playing') {
             this.updateGame();
+        } else if (this.state === 'dying') {
+            this.updateDeathState();
+        } else if (this.state === 'levelcomplete') {
+            this.updateLevelCompleteState();
         }
 
         this.fpsCounter.update();
+    }
+
+    updateDeathState() {
+        this.deathTimer += this.deltaTime;
+        
+        if (this.deathTimer >= this.deathDuration) {
+            this.deathTimer = 0;
+            this.lives--;
+            
+            if (this.lives <= 0) {
+                this.gameOver();
+            } else {
+                this.state = 'playing';
+                this.resetLevel();
+            }
+        }
+    }
+
+    updateLevelCompleteState() {
+        this.levelCompleteTimer += this.deltaTime;
+        
+        if (this.levelCompleteTimer >= this.levelCompleteDuration) {
+            this.levelCompleteTimer = 0;
+            this.state = 'playing';
+            this.resetLevel();
+        }
     }
 
     updateGame() {
@@ -344,29 +380,17 @@ class Game {
     }
 
     pacmanDeath() {
+        this.state = 'dying';
+        this.deathTimer = 0;
         this.pacman.die();
         this.soundManager.play('death');
         this.soundManager.stopBackgroundMusic();
-        
-        setTimeout(() => {
-            this.lives--;
-            
-            if (this.lives <= 0) {
-                this.gameOver();
-            } else {
-                this.resetLevel();
-            }
-        }, 2000);
     }
 
     levelComplete() {
         this.state = 'levelcomplete';
+        this.levelCompleteTimer = 0;
         this.level++;
-        
-        setTimeout(() => {
-            this.state = 'playing';
-            this.resetLevel();
-        }, 2000);
     }
 
     gameOver() {
@@ -416,6 +440,11 @@ class Game {
         // Draw level complete overlay
         if (this.state === 'levelcomplete') {
             this.drawLevelCompleteOverlay();
+        }
+        
+        // Continue drawing during death animation
+        if (this.state === 'dying') {
+            // Game continues to render normally during death
         }
     }
 
