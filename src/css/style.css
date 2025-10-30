@@ -1,0 +1,275 @@
+/**
+ * Pac-Man Game Styles
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1e1e2e 0%, #0a0a1e 100%);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    color: #FFFF00;
+    text-shadow: 
+        0 0 10px rgba(255, 255, 0, 0.5),
+        0 0 20px rgba(255, 255, 0, 0.3),
+        0 0 30px rgba(255, 255, 0, 0.2);
+    margin-bottom: 10px;
+    letter-spacing: 5px;
+}
+
+#gameCanvas {
+    border: 4px solid #2121DE;
+    border-radius: 8px;
+    box-shadow: 
+        0 0 20px rgba(33, 33, 222, 0.5),
+        0 0 40px rgba(33, 33, 222, 0.3),
+        0 4px 6px rgba(0, 0, 0, 0.3);
+    background: #000000;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #aaaaaa;
+    max-width: 560px;
+}
+
+.controls h3 {
+    color: #FFB897;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.controls p {
+    margin: 3px 0;
+}
+
+.key-hint {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0 3px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.info-panel {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 15px;
+    background: rgba(33, 33, 222, 0.1);
+    border-radius: 8px;
+    border: 2px solid rgba(33, 33, 222, 0.3);
+    max-width: 560px;
+    width: 100%;
+}
+
+.info-item {
+    text-align: center;
+}
+
+.info-item .label {
+    font-size: 0.8rem;
+    color: #aaaaaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-item .value {
+    font-size: 1.5rem;
+    color: #FFFF00;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.ghost-info {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.ghost-item {
+    text-align: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+}
+
+.ghost-item .ghost-name {
+    font-size: 0.9rem;
+    color: #FFB897;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.ghost-item .ghost-behavior {
+    font-size: 0.7rem;
+    color: #aaaaaa;
+    font-style: italic;
+}
+
+.ghost-color-blinky { color: #FF0000; }
+.ghost-color-pinky { color: #FFB8FF; }
+.ghost-color-inky { color: #00FFFF; }
+.ghost-color-clyde { color: #FFB851; }
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #666666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+        letter-spacing: 3px;
+    }
+
+    #gameCanvas {
+        max-width: 100%;
+        height: auto;
+        border-width: 2px;
+    }
+
+    .controls {
+        font-size: 0.8rem;
+    }
+
+    .info-panel {
+        gap: 15px;
+    }
+
+    .info-item .value {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+
+    .container {
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .controls {
+        font-size: 0.75rem;
+    }
+
+    .key-hint {
+        padding: 1px 5px;
+        font-size: 0.75rem;
+    }
+
+    .info-panel {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .ghost-info {
+        gap: 10px;
+    }
+}
+
+/* Loading screen */
+.loading {
+    text-align: center;
+    padding: 40px;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top: 4px solid #FFFF00;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus states for accessibility */
+button:focus,
+canvas:focus {
+    outline: 3px solid #FFFF00;
+    outline-offset: 3px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    body {
+        background: #000000;
+    }
+
+    #gameCanvas {
+        border-color: #FFFFFF;
+    }
+
+    .info-panel {
+        border-color: #FFFFFF;
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
